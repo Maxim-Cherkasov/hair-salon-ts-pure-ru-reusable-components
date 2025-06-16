@@ -8,49 +8,49 @@ interface Service {
   name: string
 }
 
-interface HaircutType {
+interface ServiceType {
   title: string
   description: string
   image: string
   services: Service[]
 }
 
-interface HaircutTypes {
-  [key: string]: HaircutType
+interface ServiceTypes {
+  [key: string]: ServiceType
 }
 
-const haircutTypes: HaircutTypes = {
-  men: {
-    title: "Мужские Стрижки",
-    description: "Наши фирменные мужские стрижки сочетают классические техники с современным стайлингом для создания изысканного образа, который подходит вашей индивидуальности и образу жизни.",
-    image: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800&q=80",
+const serviceTypes: ServiceTypes = {
+  city: {
+    title: "Городские Перевозки",
+    description: "Быстрая и надежная доставка грузов по городу. Современный автопарк различной грузоподъемности для решения любых транспортных задач в городских условиях.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
     services: [
-      { name: "Классическая Мужская Стрижка" },
-      { name: "Современный Фейд" },
-      { name: "Деловой Стиль" },
-      { name: "Стрижка и Укладка Бороды" }
+      { name: "Доставка до 1 тонны" },
+      { name: "Грузовики до 5 тонн" },
+      { name: "Переезды квартир и офисов" },
+      { name: "Срочная подача транспорта" }
     ]
   },
-  women: {
-    title: "Женские Стрижки",
-    description: "Преображающие стрижки и укладки, подчеркивающие вашу естественную красоту, от классического боба до современных многослойных стрижек.",
-    image: "https://images.unsplash.com/photo-1620331311520-246422fd82f9?w=800&q=80",
+  intercity: {
+    title: "Междугородние Перевозки",
+    description: "Профессиональная доставка грузов по всей России с гарантией сроков. Опытные водители и современное оборудование для дальних маршрутов.",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
     services: [
-      { name: "Точная Стрижка" },
-      { name: "Многослойная Укладка" },
-      { name: "Стрижки Боб и Лоб" },
-      { name: "Укладка для Особых Случаев" }
+      { name: "Доставка по России" },
+      { name: "Сборные грузы" },
+      { name: "Полная загрузка фуры" },
+      { name: "Отслеживание груза онлайн" }
     ]
   },
-  children: {
-    title: "Детские Стрижки",
-    description: "Бережные, терпеливые услуги стрижки для детей в дружелюбной, приветливой обстановке.",
-    image: "https://images.unsplash.com/photo-1533512930330-4ac257c86793?w=800&q=80",
+  special: {
+    title: "Специальные Перевозки",
+    description: "Транспортировка негабаритных, опасных и специфических грузов с соблюдением всех требований безопасности и нормативов.",
+    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80",
     services: [
-      { name: "Первая Стрижка" },
-      { name: "Модные Стрижки для Мальчиков" },
-      { name: "Стильные Стрижки для Девочек" },
-      { name: "Семейные Пакеты" }
+      { name: "Негабаритные грузы" },
+      { name: "Рефрижераторы" },
+      { name: "Опасные грузы ADR" },
+      { name: "Автовозы" }
     ]
   }
 }
@@ -115,7 +115,7 @@ function ServiceContent({ title, description, services }: ServiceContentProps) {
   )
 }
 
-export function HaircutsSection() {
+export function ServicesSection() {
   return (
     <section id="services" className="py-24 bg-zinc-50/50 dark:bg-zinc-950/50">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -123,16 +123,16 @@ export function HaircutsSection() {
           Наши Услуги
         </h2>
 
-        <Tabs defaultValue="men" className="w-full">
+        <Tabs defaultValue="city" className="w-full">
           <div className="flex justify-center mb-8">
             <TabsList className="flex flex-col sm:flex-row">
-              <TabsTrigger value="men">Мужские Стрижки</TabsTrigger>
-              <TabsTrigger value="women">Женские Стрижки</TabsTrigger>
-              <TabsTrigger value="children">Детские Стрижки</TabsTrigger>
+              <TabsTrigger value="city">Городские</TabsTrigger>
+              <TabsTrigger value="intercity">Междугородние</TabsTrigger>
+              <TabsTrigger value="special">Специальные</TabsTrigger>
             </TabsList>
           </div>
 
-          {Object.entries(haircutTypes).map(([key, section]) => (
+          {Object.entries(serviceTypes).map(([key, section]) => (
             <TabsContent key={key} value={key} className="mt-0">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <ServiceImage image={section.image} title={section.title} />

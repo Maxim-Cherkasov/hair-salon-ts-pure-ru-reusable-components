@@ -6,8 +6,8 @@ import { Footer } from '@/components/footer'
 import { Toaster } from "sonner"
 
 export const metadata: Metadata = {
-  title: 'StyleCuts Studio',
-  description: 'Premium Hair Salon Services',
+  title: 'ГрузТранс Логистика',
+  description: 'Профессиональные услуги грузоперевозок по России и СНГ',
 }
 
 export default function RootLayout({

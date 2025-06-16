@@ -15,23 +15,24 @@ const contactInfo: ContactInfo[] = [
     href: "tel:+79991234567"
   },
   {
-    text: "info@stylecuts.ru",
-    href: "mailto:info@stylecuts.ru"
+    text: "info@gruztrans.ru",
+    href: "mailto:info@gruztrans.ru"
   },
   {
-    text: "ул. Стильная 123, Москва, 123456"
+    text: "ул. Транспортная 45, Москва, 123456"
   }
 ]
 
 function BusinessHours() {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold">Часы Работы</h3>
+      <h3 className="text-lg font-semibold">Режим Работы</h3>
       <div className="flex items-start gap-3 text-zinc-400">
         <div className="space-y-1 text-sm">
-          <p>Понедельник - Пятница: 9:00 - 20:00</p>
-          <p>Суббота: 10:00 - 18:00</p>
-          <p>Воскресенье: Выходной</p>
+          <p>Понедельник - Пятница: 8:00 - 20:00</p>
+          <p>Суббота: 9:00 - 18:00</p>
+          <p>Воскресенье: 10:00 - 16:00</p>
+          <p className="text-xs text-zinc-500 mt-2">Диспетчерская служба 24/7</p>
         </div>
       </div>
     </div>
@@ -66,10 +67,10 @@ function BrandSection() {
   return (
     <div className="space-y-4">
       <div className="flex items-center space-x-3">
-        <span className="text-xl font-semibold tracking-tight">СтильСтриж</span>
+        <span className="text-xl font-semibold tracking-tight">ГрузТранс Логистика</span>
       </div>
       <p className="text-zinc-400 text-sm leading-relaxed">
-        Премиум салон красоты, предоставляющий исключительные услуги стайлинга в роскошной и уютной атмосфере.
+        Профессиональная транспортная компания, предоставляющая полный спектр услуг грузоперевозок по России и СНГ с гарантией качества и соблюдения сроков.
       </p>
     </div>
   )
@@ -129,12 +130,12 @@ export function Footer() {
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-sm text-zinc-400">
-              © {new Date().getFullYear()} СтильСтриж. Все права защищены.
+              © {new Date().getFullYear()} ГрузТранс Логистика. Все права защищены.
             </div>
 
             <div className="flex gap-8 text-sm text-zinc-400">
               <a href="#" className="hover:text-zinc-200 transition-colors">Политика Конфиденциальности</a>
-              <a href="#" className="hover:text-zinc-200 transition-colors">Условия Использования</a>
+              <a href="#" className="hover:text-zinc-200 transition-colors">Условия Перевозки</a>
             </div>
           </div>
         </div>

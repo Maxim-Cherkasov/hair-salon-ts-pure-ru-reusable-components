@@ -17,34 +17,34 @@ interface Service {
 
 const services: Service[] = [
   { 
-    name: "Женская Стрижка", 
-    price: "4500₽", 
-    description: "Включает консультацию, мытье, стрижку и укладку" 
+    name: "Городская доставка (до 1т)", 
+    price: "от 1500₽", 
+    description: "Доставка по городу, включая погрузку/разгрузку" 
   },
   { 
-    name: "Мужская Стрижка", 
-    price: "3000₽", 
-    description: "Точная стрижка с укладкой" 
+    name: "Грузовик до 5т", 
+    price: "от 2500₽", 
+    description: "Перевозка грузов средней тяжести по городу" 
   },
   { 
-    name: "Окрашивание и Мелирование", 
-    price: "9000₽", 
-    description: "Полное окрашивание или частичное/полное мелирование" 
+    name: "Междугородние перевозки", 
+    price: "от 35₽/км", 
+    description: "Доставка по России, цена за километр" 
   },
   { 
-    name: "Укладка и Стайлинг", 
-    price: "3500₽", 
-    description: "Профессиональная сушка и укладка" 
+    name: "Рефрижератор", 
+    price: "от 45₽/км", 
+    description: "Перевозка скоропортящихся товаров" 
   },
   { 
-    name: "Уход за Волосами", 
-    price: "6000₽", 
-    description: "Глубокое кондиционирование и восстанавливающий уход" 
+    name: "Негабаритные грузы", 
+    price: "по договору", 
+    description: "Специальный транспорт и разрешения" 
   },
   { 
-    name: "Свадебная Укладка", 
-    price: "11000₽", 
-    description: "Полный свадебный дизайн прически" 
+    name: "Складские услуги", 
+    price: "от 150₽/м²", 
+    description: "Хранение грузов на наших складах" 
   }
 ]
 
@@ -52,10 +52,10 @@ function TableTitle() {
   return (
     <div className="p-6 border-b">
       <h3 className="text-xl font-semibold bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900 bg-clip-text text-transparent dark:from-zinc-100 dark:via-zinc-400 dark:to-zinc-100">
-        Меню Услуг
+        Тарифы на Услуги
       </h3>
       <p className="mt-1 text-sm text-muted-foreground">
-        Выберите из нашего спектра профессиональных услуг
+        Выберите подходящий тариф для ваших грузоперевозок
       </p>
     </div>
   )

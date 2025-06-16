@@ -10,28 +10,28 @@ interface GalleryImage {
 
 const galleryImages: GalleryImage[] = [
   {
-    url: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=800&q=80",
-    alt: "Результат профессиональной укладки с элегантными волнами"
+    url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+    alt: "Современный грузовик для междугородних перевозок"
   },
   {
-    url: "https://images.unsplash.com/photo-1562004760-aceed7bb0fe3?w=800&q=80",
-    alt: "Современная мужская стрижка с точным фейдом"
+    url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    alt: "Городской грузовик для доставки по городу"
   },
   {
-    url: "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=800&q=80",
-    alt: "Креативное окрашивание и мелирование волос"
+    url: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80",
+    alt: "Специализированный транспорт для негабаритных грузов"
   },
   {
-    url: "https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=800&q=80",
-    alt: "Классическое женское каре с гладкой укладкой"
+    url: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80",
+    alt: "Рефрижератор для перевозки скоропортящихся товаров"
   },
   {
-    url: "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=800&q=80",
-    alt: "Свадебная прическа с элегантным пучком"
+    url: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80",
+    alt: "Современный складской комплекс"
   },
   {
-    url: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800&q=80",
-    alt: "Современная мужская укладка с текстурированным верхом"
+    url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
+    alt: "Экспресс доставка малогабаритных грузов"
   }
 ]
 
@@ -62,7 +62,7 @@ function GalleryItem({ image, index }: GalleryItemProps) {
 
 export function GalleryGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="region" aria-label="Галерея наших работ">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="region" aria-label="Галерея нашего автопарка">
       {galleryImages.map((image, index) => (
         <GalleryItem 
           key={image.url} 

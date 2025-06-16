@@ -33,13 +33,13 @@ export function ContactForm() {
       const data = await response.json()
 
       if (data.success) {
-        toast.success("Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.")
+        toast.success("Спасибо за заявку! Наш менеджер свяжется с вами в ближайшее время для расчета стоимости.")
         e.currentTarget.reset()
       } else {
         throw new Error("Что-то пошло не так")
       }
     } catch (error) {
-      toast.error("Извините, что-то пошло не так. Пожалуйста, попробуйте еще раз.")
+      toast.error("Извините, что-то пошло не так. Пожалуйста, попробуйте еще раз или позвоните нам.")
     } finally {
       setIsSubmitting(false)
     }
@@ -51,10 +51,10 @@ export function ContactForm() {
       <Card className="relative border-0 bg-background/80 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]">
         <CardHeader>
           <CardTitle className="text-2xl bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900 bg-clip-text text-transparent dark:from-zinc-100 dark:via-zinc-400 dark:to-zinc-100">
-            Свяжитесь с Нами
+            Заказать Перевозку
           </CardTitle>
           <CardDescription>
-            Заполните форму ниже, и мы свяжемся с вами в ближайшее время.
+            Оставьте заявку и получите расчет стоимости в течение 15 минут.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -79,12 +79,12 @@ export function ContactForm() {
             <div className="space-y-2">
               <Textarea
                 name="message"
-                placeholder="Ваше сообщение"
+                placeholder="Опишите ваш груз: откуда-куда, вес, габариты, особенности"
                 required
                 minLength={10}
                 rows={4}
                 className="resize-none bg-background shadow-[0_2px_10px_rgb(0,0,0,0.02)] dark:shadow-[0_2px_10px_rgb(0,0,0,0.08)]"
-                aria-label="Ваше сообщение"
+                aria-label="Описание груза"
               />
             </div>
 
@@ -92,9 +92,9 @@ export function ContactForm() {
               type="submit" 
               className="w-full h-12 text-base font-medium bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 hover:from-zinc-800 hover:to-zinc-800 dark:from-zinc-200 dark:via-zinc-300 dark:to-zinc-200 dark:hover:from-zinc-300 dark:hover:to-zinc-300 dark:text-zinc-900 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]"
               disabled={isSubmitting}
-              aria-label={isSubmitting ? "Отправка сообщения..." : "Отправить сообщение"}
+              aria-label={isSubmitting ? "Отправка заявки..." : "Получить расчет"}
             >
-              {isSubmitting ? "Отправка..." : "Отправить Сообщение"}
+              {isSubmitting ? "Отправка..." : "Получить Расчет"}
             </Button>
           </form>
         </CardContent>
