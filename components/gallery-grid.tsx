@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { useEffect, useState } from "react"
 
 interface GalleryImage {
   url: string
@@ -42,17 +43,19 @@ interface GalleryItemProps {
 
 function GalleryItem({ image, index }: GalleryItemProps) {
   return (
-    <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-br from-zinc-200 via-transparent to-zinc-200 dark:from-zinc-800 dark:to-zinc-800 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      <Card className="relative border-0 rounded-xl overflow-hidden bg-background/80 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-shadow duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.15)]">
+    <div className="relative group animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-600 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+      <Card className="relative border-0 rounded-2xl overflow-hidden glass-effect glass-effect-dark shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.02]">
         <CardContent className="p-0">
           <AspectRatio ratio={1}>
             <img
               src={image.url}
               alt={image.alt}
-              className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+              className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
               loading="lazy"
             />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
           </AspectRatio>
         </CardContent>
       </Card>
@@ -61,8 +64,26 @@ function GalleryItem({ image, index }: GalleryItemProps) {
 }
 
 export function GalleryGrid() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    const element = document.getElementById('gallery')
+    if (element) observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="region" aria-label="Галерея нашего автопарка">
+    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} role="region" aria-label="Галерея нашего автопарка">
       {galleryImages.map((image, index) => (
         <GalleryItem 
           key={image.url} 

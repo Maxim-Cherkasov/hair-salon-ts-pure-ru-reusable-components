@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Send, Phone, MessageCircle } from "lucide-react"
 
 interface FormData {
   phone: string
@@ -46,55 +47,72 @@ export function ContactForm() {
   }
 
   return (
-    <div className="relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-200 via-transparent to-zinc-200 dark:from-zinc-800 dark:to-zinc-800 rounded-xl" />
-      <Card className="relative border-0 bg-background/80 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]">
-        <CardHeader>
-          <CardTitle className="text-2xl bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900 bg-clip-text text-transparent dark:from-zinc-100 dark:via-zinc-400 dark:to-zinc-100">
+    <div className="relative animate-scale-in">
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-600 to-blue-500 rounded-2xl opacity-20 blur-sm" />
+      <Card className="relative border-0 glass-effect glass-effect-dark shadow-2xl overflow-hidden">
+        <CardHeader className="text-center pb-8">
+          <div className="flex justify-center mb-4">
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-glow">
+              <Send className="w-8 h-8 text-white" />
+            </div>
+          </div>
+          <CardTitle className="text-3xl font-bold gradient-text gradient-text-dark">
             Заказать Перевозку
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-lg text-muted-foreground">
             Оставьте заявку и получите расчет стоимости в течение 15 минут.
           </CardDescription>
+          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-4 rounded-full shadow-glow" />
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <CardContent className="p-8">
+          <form onSubmit={handleSubmit} className="space-y-8">
             <input 
               type="hidden" 
               name="access_key" 
               value="322cc816-d2e8-4dfb-bd3b-72b571d86eba"
             />
 
-            <div className="space-y-2">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 mb-2">
+                <Phone className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                <label className="text-sm font-medium">Номер телефона</label>
+              </div>
               <Input
                 type="tel"
                 name="phone"
-                placeholder="Номер телефона"
+                placeholder="+7 (999) 123-45-67"
                 required
-                className="h-12 bg-background shadow-[0_2px_10px_rgb(0,0,0,0.02)] dark:shadow-[0_2px_10px_rgb(0,0,0,0.08)]"
+                className="h-14 text-lg glass-effect glass-effect-dark border-0 shadow-lg hover:shadow-glow-hover focus:shadow-glow-hover transition-all duration-300"
                 aria-label="Номер телефона"
               />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 mb-2">
+                <MessageCircle className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                <label className="text-sm font-medium">Описание груза</label>
+              </div>
               <Textarea
                 name="message"
-                placeholder="Опишите ваш груз: откуда-куда, вес, габариты, особенности"
+                placeholder="Опишите ваш груз: откуда-куда, вес, габариты, особенности..."
                 required
                 minLength={10}
-                rows={4}
-                className="resize-none bg-background shadow-[0_2px_10px_rgb(0,0,0,0.02)] dark:shadow-[0_2px_10px_rgb(0,0,0,0.08)]"
+                rows={5}
+                className="resize-none text-lg glass-effect glass-effect-dark border-0 shadow-lg hover:shadow-glow-hover focus:shadow-glow-hover transition-all duration-300"
                 aria-label="Описание груза"
               />
             </div>
 
             <Button 
               type="submit" 
-              className="w-full h-12 text-base font-medium bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 hover:from-zinc-800 hover:to-zinc-800 dark:from-zinc-200 dark:via-zinc-300 dark:to-zinc-200 dark:hover:from-zinc-300 dark:hover:to-zinc-300 dark:text-zinc-900 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]"
+              className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-glow hover:shadow-glow-hover transition-all duration-300 group"
               disabled={isSubmitting}
               aria-label={isSubmitting ? "Отправка заявки..." : "Получить расчет"}
             >
-              {isSubmitting ? "Отправка..." : "Получить Расчет"}
+              <span className="group-hover:scale-105 transition-transform duration-200">
+                {isSubmitting ? "Отправка..." : "Получить Расчет"}
+              </span>
+              {!isSubmitting && <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" />}
             </Button>
           </form>
         </CardContent>

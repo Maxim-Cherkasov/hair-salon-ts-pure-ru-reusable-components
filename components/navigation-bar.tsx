@@ -47,7 +47,7 @@ function NavigationLinks({ onClick, className = "" }: { onClick?: () => void, cl
         <Button
           key={href}
           variant="ghost"
-          className={`text-sm font-medium text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-200 transition-colors ${className}`}
+          className={`text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-600/10 transition-all duration-300 ${className}`}
           onClick={() => {
             scrollToSection(href)
             if (onClick) onClick()
@@ -62,9 +62,11 @@ function NavigationLinks({ onClick, className = "" }: { onClick?: () => void, cl
 
 function BrandLogo() {
   return (
-    <Link href="/" className="flex items-center space-x-2">
-      <Truck className="h-6 w-6" />
-      <span className="text-xl font-semibold text-zinc-950 dark:text-zinc-50">
+    <Link href="/" className="flex items-center space-x-3 group">
+      <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-glow group-hover:shadow-glow-hover transition-all duration-300 group-hover:scale-105">
+        <Truck className="h-6 w-6 text-white" />
+      </div>
+      <span className="text-xl font-bold gradient-text gradient-text-dark">
         ГрузТранс
       </span>
     </Link>
@@ -84,8 +86,10 @@ export function NavigationBar() {
   }, [])
 
   return (
-    <header className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-shadow ${
-      isScrolled ? 'shadow-md' : ''
+    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      isScrolled 
+        ? 'glass-effect glass-effect-dark shadow-xl border-b border-white/20 dark:border-white/10' 
+        : 'bg-background/80 backdrop-blur-sm border-b border-border/50'
     }`}>
       <div className="container mx-auto px-4 flex h-16 items-center justify-between max-w-7xl">
         <div className="flex items-center gap-2">
@@ -94,20 +98,20 @@ export function NavigationBar() {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="md:hidden"
+                className="md:hidden hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-600/10 transition-all duration-300"
                 aria-label="Открыть меню навигации"
               >
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left">
-              <SheetTitle>Меню Навигации</SheetTitle>
+            <SheetContent side="left" className="glass-effect glass-effect-dark border-r border-white/20 dark:border-white/10">
+              <SheetTitle className="gradient-text gradient-text-dark">Меню Навигации</SheetTitle>
               <nav className="flex flex-col gap-4 mt-8">
                 <SheetClose asChild>
                   <div className="flex flex-col gap-2">
                     <NavigationLinks 
                       onClick={() => {}} 
-                      className="justify-start text-lg"
+                      className="justify-start text-lg h-12"
                     />
                   </div>
                 </SheetClose>
@@ -118,7 +122,7 @@ export function NavigationBar() {
           <BrandLogo />
         </div>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-2">
           <NavigationLinks />
         </nav>
 

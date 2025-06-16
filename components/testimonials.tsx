@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { Star } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Star, Quote } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
@@ -65,7 +65,8 @@ function StarRating({ rating }: StarRatingProps) {
       {[...Array(rating)].map((_, i) => (
         <Star 
           key={i} 
-          className="w-5 h-5 fill-zinc-950 text-zinc-950 dark:fill-zinc-200 dark:text-zinc-200" 
+          className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm animate-scale-in" 
+          style={{ animationDelay: `${i * 0.1}s` }}
         />
       ))}
     </div>
@@ -74,36 +75,44 @@ function StarRating({ rating }: StarRatingProps) {
 
 interface TestimonialCardProps {
   testimonial: Testimonial
+  index: number
 }
 
-function TestimonialCard({ testimonial }: TestimonialCardProps) {
+function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
   return (
-    <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-br from-zinc-200 via-transparent to-zinc-200 dark:from-zinc-800 dark:to-zinc-800 rounded-xl opacity-75" />
-      <Card className="relative p-8 bg-background/80 backdrop-blur-sm border-0">
+    <div className="relative group animate-scale-in" style={{ animationDelay: `${index * 0.2}s` }}>
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-600 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+      <Card className="relative p-8 glass-effect glass-effect-dark border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:scale-[1.02]">
+        <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+          <Quote className="w-12 h-12 text-blue-500" />
+        </div>
+        
         <StarRating rating={testimonial.rating} />
         
-        <p className="mt-6 mb-8 text-muted-foreground leading-relaxed">
+        <p className="mt-6 mb-8 text-muted-foreground leading-relaxed text-lg relative z-10">
           {testimonial.content}
         </p>
 
         <div className="flex items-center gap-4">
-          <Avatar className="h-12 w-12 border-2 border-zinc-200 dark:border-zinc-800">
-            <AvatarImage 
-              src={testimonial.avatar} 
-              alt={testimonial.author} 
-            />
-            <AvatarFallback className="bg-zinc-100 dark:bg-zinc-800">
-              {testimonial.author[0]}
-            </AvatarFallback>
-          </Avatar>
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
+            <Avatar className="relative h-14 w-14 border-2 border-white/20 shadow-lg">
+              <AvatarImage 
+                src={testimonial.avatar} 
+                alt={testimonial.author} 
+              />
+              <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">
+                {testimonial.author[0]}
+              </AvatarFallback>
+            </Avatar>
+          </div>
           
           <div className="flex-1">
-            <h4 className="font-semibold">{testimonial.author}</h4>
+            <h4 className="font-semibold text-lg">{testimonial.author}</h4>
             <p className="text-sm text-muted-foreground">{testimonial.role}</p>
           </div>
 
-          <time className="text-sm text-muted-foreground">
+          <time className="text-sm text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
             {testimonial.date}
           </time>
         </div>
@@ -114,27 +123,49 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
 export function Testimonials() {
   const [showAll, setShowAll] = useState<boolean>(false)
+  const [isVisible, setIsVisible] = useState(false)
   const displayedTestimonials = showAll ? testimonials : testimonials.slice(0, 2)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    const element = document.getElementById('testimonials')
+    if (element) observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-radial from-zinc-100 via-zinc-50/50 to-white dark:from-zinc-900 dark:via-zinc-950/50 dark:to-black" />
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 via-blue-50/20 to-purple-50/30 dark:from-purple-950/10 dark:via-blue-950/10 dark:to-purple-950/10" />
+      <div className="absolute top-40 left-40 w-80 h-80 bg-gradient-to-br from-purple-400/10 to-blue-600/10 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-40 right-40 w-80 h-80 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
 
-      <div className="container mx-auto px-4 max-w-7xl relative">
+      <div className={`container mx-auto px-4 max-w-7xl relative transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950 bg-clip-text text-transparent dark:from-zinc-200 dark:via-zinc-400 dark:to-zinc-200">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text gradient-text-dark">
             Отзывы Клиентов
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
             Что говорят наши партнеры о качестве наших услуг
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-600 mx-auto mt-6 rounded-full shadow-glow" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {displayedTestimonials.map((testimonial) => (
+          {displayedTestimonials.map((testimonial, index) => (
             <TestimonialCard 
               key={testimonial.id} 
-              testimonial={testimonial} 
+              testimonial={testimonial}
+              index={index}
             />
           ))}
         </div>
@@ -143,12 +174,14 @@ export function Testimonials() {
           <Button 
             variant="outline"
             size="lg"
-            className="h-11 px-8 border-2 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            className="h-12 px-8 border-2 glass-effect glass-effect-dark hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white hover:border-transparent hover:shadow-glow-hover transition-all duration-300 group"
             onClick={() => setShowAll(!showAll)}
             aria-expanded={showAll}
             aria-controls="testimonials-grid"
           >
-            {showAll ? "Показать Меньше" : "Смотреть Все Отзывы"}
+            <span className="group-hover:scale-105 transition-transform duration-200">
+              {showAll ? "Показать Меньше" : "Смотреть Все Отзывы"}
+            </span>
           </Button>
         </div>
       </div>

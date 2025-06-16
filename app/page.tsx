@@ -12,26 +12,50 @@ export default function HomePage() {
       <Hero />
       <HeroCarousel />
       
-      <div className="container mx-auto px-4 py-24 max-w-7xl">
+      <div className="container mx-auto px-4 py-24 max-w-7xl space-y-32">
         <ServicesSection />
 
         <Testimonials />
 
-        <section id="gallery" className="mb-24">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950 bg-clip-text text-transparent">Наш Автопарк</h2>
+        <section id="gallery" className="relative">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text gradient-text-dark">
+              Наш Автопарк
+            </h2>
+            <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
+              Современный и надежный автопарк для любых задач
+            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-6 rounded-full shadow-glow" />
+          </div>
           <GalleryGrid />
         </section>
 
-        <section id="prices" className="mb-24">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950 bg-clip-text text-transparent">Тарифы</h2>
-          <div className="max-w-4xl mx-auto">
+        <section id="prices" className="relative">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text gradient-text-dark">
+              Тарифы
+            </h2>
+            <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
+              Прозрачные и конкурентные цены на все виды перевозок
+            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-6 rounded-full shadow-glow" />
+          </div>
+          <div className="max-w-5xl mx-auto">
             <PriceTable />
           </div>
         </section>
 
-        <section id="contact" className="mb-24">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-950 bg-clip-text text-transparent">Заказать Перевозку</h2>
-          <div className="max-w-xl mx-auto">
+        <section id="contact" className="relative">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text gradient-text-dark">
+              Заказать Перевозку
+            </h2>
+            <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
+              Получите персональный расчет стоимости за 15 минут
+            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-6 rounded-full shadow-glow" />
+          </div>
+          <div className="max-w-2xl mx-auto">
             <ContactForm />
           </div>
         </section>
